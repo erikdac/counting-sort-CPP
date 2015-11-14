@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include <type_traits>
  
@@ -19,14 +18,26 @@ void counting_sort(std::vector<T> & v) {
 			max = v[i];
 	}
 
-	T count[max-min];
+	T count[max-min+1];
 	for(int i = 0; i <= max-min; ++i)
 		count[i] = 0;
 
 	for(int i = 0; i < v.size(); ++i)
 		++count[v[i]-min];
 
-	for(int i = 0; i <= max-min; ++i)
-		std::cout << (i+min) << ":\t" << count[i] << std::endl;
+	std::vector<T> out(v.size());
 
+	T total = 0;
+	for(int i = 0; i <= max-min+1; ++i) {
+		T oldCount = count[i];
+		count[i] = total;
+		total += oldCount;
+	}
+
+	for(int i = 0; i < out.size(); ++i) {
+		out[count[v[i]-min]] = v[i];
+		++count[v[i]-min];
+	}
+
+	v = out;
 }
