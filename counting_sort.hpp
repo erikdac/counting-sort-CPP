@@ -6,7 +6,7 @@ template <
 	typename T, 
 	typename = typename std::enable_if<std::is_integral<T>::value, T>::type
 >
-void sort(std::vector<T> & v) {
+void counting_sort(std::vector<T> & v) {
 	if(v.size() == 0)
 		return;
 
@@ -19,6 +19,14 @@ void sort(std::vector<T> & v) {
 			max = v[i];
 	}
 
-	std::cout << min << "\t" << max << std::endl;
+	T count[max-min];
+	for(int i = 0; i <= max-min; ++i)
+		count[i] = 0;
+
+	for(int i = 0; i < v.size(); ++i)
+		++count[v[i]-min];
+
+	for(int i = 0; i <= max-min; ++i)
+		std::cout << (i+min) << ":\t" << count[i] << std::endl;
 
 }

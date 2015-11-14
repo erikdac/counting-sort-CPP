@@ -11,5 +11,5 @@ int main() {
 	v.push_back(2);
 	v.push_back(1);
 
-	sort(v);
+	counting_sort(v);
 }
