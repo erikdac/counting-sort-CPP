@@ -74,33 +74,77 @@ TEST_CASE("SMALL") {
 		REQUIRE(v[0] == 2);
 		REQUIRE(v[1] == 5);
 	}
+
+	SECTION("3 ELEMENTS") {
+		std::vector<int> v = {5, 3, 1};
+		erikdac::counting_sort(v);
+		REQUIRE(v.size() == 3);
+		REQUIRE(v[0] == 1);
+		REQUIRE(v[1] == 3);
+		REQUIRE(v[2] == 5);
+
+		erikdac::counting_sort(v);
+		REQUIRE(v.size() == 3);
+		REQUIRE(v[0] == 1);
+		REQUIRE(v[1] == 3);
+		REQUIRE(v[2] == 5);
+	}
 }
 
 TEST_CASE("LARGE") {
-	SECTION("1 000 000 INT ELEMENTS REVERSE") {
-		std::vector<int> v;
-		for(int i = -500000; i < 500000; ++i) {
-			v.push_back(-i + 500000);
+
+	SECTION("10 000 SHORT ELEMENTS REVERSE") {
+		std::vector<short> v;
+		for(int i = -5000; i < 5000; ++i) {
+			v.push_back(-i + 5000);
 		}
 
 		erikdac::counting_sort(v);
 
-		REQUIRE(v.size() == 1000000);
-		for(int i = 0; i < 1000000; ++i) {
+		REQUIRE(v.size() == 10000);
+		for(int i = 0; i < 10000; ++i) {
 			REQUIRE(v[i] == i+1);
 		}
 	}
 
-	SECTION("1 000 000 UNSIGNED INT ELEMENTS REVERSE") {
-		std::vector<unsigned int> v;
-		for(int i = -500000; i < 500000; ++i) {
-			v.push_back(-i + 500000);
+	SECTION("10 000 SHORT ELEMENTS REVERSE") {
+		std::vector<unsigned short> v;
+		for(int i = -5000; i < 5000; ++i) {
+			v.push_back(-i + 5000);
 		}
 
 		erikdac::counting_sort(v);
 
-		REQUIRE(v.size() == 1000000);
-		for(int i = 0; i < 1000000; ++i) {
+		REQUIRE(v.size() == 10000);
+		for(int i = 0; i < 10000; ++i) {
+			REQUIRE(v[i] == i+1);
+		}
+	}
+
+	SECTION("100 000 INT ELEMENTS REVERSE") {
+		std::vector<int> v;
+		for(int i = -50000; i < 50000; ++i) {
+			v.push_back(-i + 50000);
+		}
+
+		erikdac::counting_sort(v);
+
+		REQUIRE(v.size() == 100000);
+		for(int i = 0; i < 100000; ++i) {
+			REQUIRE(v[i] == i+1);
+		}
+	}
+
+	SECTION("100 000 UNSIGNED INT ELEMENTS REVERSE") {
+		std::vector<unsigned int> v;
+		for(int i = -50000; i < 50000; ++i) {
+			v.push_back(-i + 50000);
+		}
+
+		erikdac::counting_sort(v);
+
+		REQUIRE(v.size() == 100000);
+		for(int i = 0; i < 100000; ++i) {
 			REQUIRE(v[i] == i+1);
 		}
 	}
@@ -134,23 +178,13 @@ TEST_CASE("TIME COMPARISSON") {
 	std::cout << "Counting sort: \t" << counting_time << std::endl;
 
 
-
 	std::vector<int> second = v;
 
 	begin = clock();
 
-	erikdac::counting_sort(second);
+	std::sort(second.begin(), second.end());
 	
 	end = clock();
 	double std_time = double(end - begin) / CLOCKS_PER_SEC;
 	std::cout << "Std sort: \t" << std_time << std::endl;
-
-
-/*
-	for(int i = 0; i < v.size(); ++i) {
-		std::cout << v[i] << std::endl;;
-	}
-	std::cout << std::endl;
-*/
-
 }
