@@ -20,7 +20,7 @@ namespace erikdac {
 				max = v[i];
 		}
 
-		T * count = new T[max-min+1];
+		T count[max-min+1];
 		for(int i = 0; i <= max-min; ++i)
 			count[i] = 0;
 
@@ -40,7 +40,6 @@ namespace erikdac {
 			out[count[v[i]-min]] = v[i];
 			++count[v[i]-min];
 		}
-		delete [] count;
 
 		v = out;
 	}

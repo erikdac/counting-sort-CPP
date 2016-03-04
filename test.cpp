@@ -135,7 +135,7 @@ TEST_CASE("LARGE") {
 		}
 	}
 
-	SECTION("100 000 UNSIGNED INT ELEMENTS REVERSE") {
+	SECTION("100 000 INT ELEMENTS REVERSE") {
 		std::vector<unsigned int> v;
 		for(int i = -50000; i < 50000; ++i) {
 			v.push_back(-i + 50000);
@@ -152,12 +152,12 @@ TEST_CASE("LARGE") {
 
 // ============================================================================
 
-#define RANGE 100000
+#define RANGE 5000000
 
 TEST_CASE("TIME COMPARISSON") {
 	std::vector<int> v;
 	for(int i = -RANGE; i < RANGE; ++i) {
-		v.push_back(-i/5);
+		v.push_back(-2*i%5);
 	}
 	v.push_back(2);
 	v.push_back(4);
