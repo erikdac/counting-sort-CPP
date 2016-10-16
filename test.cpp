@@ -188,3 +188,4 @@ TEST_CASE("TIME COMPARISSON") {
 	double std_time = double(end - begin) / CLOCKS_PER_SEC;
 	std::cout << "Std sort: \t" << std_time << std::endl;
 }
+
